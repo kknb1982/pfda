@@ -1,23 +1,34 @@
-import mysql.connector as msql
-from mysql.connector import Error
+import mysql.connector
 
-try:
-    con = msql.connect(host='localhost', database='weather', user='root', password='')
+db = mysql.connector.connect(
+    host='localhost',   
+    user='root',
+    password='',
+    database='weather'
+)
 
-    if con.is_connected():
-        cursor = con.cursor()
-        cursor.execute("select database();")
-        record = cursor.fetchone()
-        print(f"You're connected to database: ", record)
-        cursor.execute('DROP TABLE IF EXISTS ontario_data')
-        print('Creating table....')
-        cursor.execute("CREATE TABLE ontario_data(station_ID varchar(8), date TIMESTAMP, average_temp float, min_temp float, max_temp float, month int, year int)")
-        print("Table is created....")
+cursor = db.cursor()
+TABLES = {}
+TABLES['ontario'] = [
+"CREATE TABLE ontario ("
+" 'id' INT AUTO_INCREMENT PRIMARY KEY,"
+" 'station_ID' INT,'"
+"' date' DATE,"
+"'average_temp' FLOAT,"
+"'max_temp' FLOAT,"
+"'min_temp' FLOAT,"
+"'month' INT,"
+"'year' INT"]
 
-except msql.Error as err:
-    print(err.msg)
+TABLES['countries'] = ["CREATE TABLE countries ("id' INT AUTO_INCREMENT PRIMARY KEY,"country_name' VARCHAR(50))"]
 
-finally:
-    if con.is_connected():
-        cursor.close()
-        con.close()
+for table_name in TABLES:
+    table_description = TABLES[table_name]
+    try:
+        print(f"Creating table {table_name}")
+        cursor.execute(table_description)
+    except mysql.connector.Error as err:
+        print(err.msg)
+
+cursor.close()
+db.close()
