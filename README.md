@@ -61,4 +61,8 @@ In the Codespaces terminal, run:
 - Execute the cells to explore the analysis and learning materials.
 
 ## Project details
+<<<<<<< HEAD
 The project is stored in https://github.com/kknb1982/pfda/blob/main/project/weather_suitability.ipynb. It explores downloading datasets, creating databases, visualing and analysing data and finally using machine learning to predict the weather.
+=======
+The project is formed of a main notebook and working files within the 'project' repository.
+>>>>>>> d05671d2955db2babe4921064f9c628aebfdc27f
