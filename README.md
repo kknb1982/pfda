@@ -61,3 +61,4 @@ In the Codespaces terminal, run:
 - Execute the cells to explore the analysis and learning materials.
 
 ## Project details
+The project is formed of a main notebook and working files within the 'project' repository.
